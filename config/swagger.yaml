@@ -1,0 +1,147 @@
+components:
+  schemas:
+    Todos:
+      type: Object
+      required:
+        - title
+      parameters:
+        id:
+          type: integer 
+        title:
+          type: string
+        isCompleted:
+          type: boolean
+        idUser:
+          type: integer
+      example:
+        id: 0
+        title: 'Example title'
+        isCompleted: false
+        idUser: 0
+    Authorization:
+      type: Object
+      required:
+        - login
+        - password
+      parameters:
+        login:
+          type: string
+        password:
+          type: string
+      example:
+        login: 'IbadToff'
+        password: 'qwerty'
+
+
+
+
+tags:
+  name: Todos
+  description: API for Todos
+/api/todo/todos:
+  get:
+    summary: Get all Todos
+    tags: [Todos]
+    responses:
+      '200':
+        description: Seccess
+  post:
+    summary: Create Todo
+    tags: [Todos]
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              title:
+                type: string
+    responses:
+      '200':
+        description: Seccess
+      '403':
+        description: Bad Request
+/api/todo/todos/{id}:
+  patch:
+    summary: Edit title
+    tags: [Todos]
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              title:
+                type: string
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    responses:
+      '200':
+        description: Seccess
+      '404':
+        description: "Todo is not defined"
+  delete:
+    summary: Delete Todo by ID
+    tags: [Todos]
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    responses:
+      '200': 
+        description: true
+      '400':
+        description: false
+/api/todo/todos/{id}/isCompleted:
+  patch:
+    summary: Edit 'isCompleted' by ID
+    tags: [Todos]
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    responses:
+      '200':
+        description: Seccess
+      '400':
+        description: "Todo is not defined"
+/api/authorization/login:
+  post:
+    summary: LogIn
+    tags: [Authorization]
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            $ref: "#/components/schemas/Authorization"
+    responses:
+      '200': 
+        description: Seccess
+      '401':
+        description: Unauthorized
+/api/authorization/register:
+  post:
+    summary: Resister user
+    tags: [Authorization]
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            $ref: "#/components/schemas/Authorization"
+    responses:
+      '200':
+        description: Seccess
+      '403':
+        description: Forbidden
