@@ -10,5 +10,9 @@
   {
     "login": "IbadToff1",
     "password": "$2b$10$Q.fRq4.hsTe/Pf26GruAFupHcqPwmY9vJ2BCIyuMPjRKCLxgiywoi"
+  },
+  {
+    "login": "test123",
+    "password": "$2b$10$30rvivC9xivwLfy6eokPuerTKSAzr4iCf2dZ3JPHKrtTRKwRbUOw6"
   }
 ]
